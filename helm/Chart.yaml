@@ -1,0 +1,9 @@
+apiVersion: v1
+name: satisfactory-server
+version: 1.0.0
+description: Satisfactory dedicated server.
+keywords:
+- game
+- server
+- satisfactory
+home: https://github.com/jsknnr/satisfactory-server

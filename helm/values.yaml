@@ -1,0 +1,24 @@
+image:
+  repository: sknnr/satisfactory-server
+  tag: latest
+
+service:
+  type: LoadBalancer
+  externalIPs: []
+  annotations: {}
+
+resources:
+  requests:
+    memory: 16G
+    cpu: 4.0
+
+volumes:
+  dataPVC:
+    size: 50Gi
+  storageClassName: ""
+
+config:
+  gamePort: "7777"
+  queryPort: "15777"
+  beaconPort: "15000"
+  multihome: "0.0.0.0"
