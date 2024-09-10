@@ -8,10 +8,11 @@ Run Satisfactory dedicated server in a container. Optionally includes helm chart
 The processes within the container do **NOT** run as root. Everything runs as the user steam (gid:10000/uid:10000 by default). If you exec into the container, you will drop into `/home/steam` as the steam user. Satisfactory will be installed to `/home/steam/satisfactory`. Any persistent volumes should be mounted to `/home/steam/satisfactory` and be owned by 10000:10000. If you need to run as a different GID/UID you can build your own image and set the build arguments for CONTAINER_GID and CONTAINER_UID to specify to new values.
 
 ### Ports
+Server to client is game port UDP, but the server manager also needs TCP. So which ever port you use for Game Port needs both TCP and UDP.
 
 | Port | Protocol | Default |
 | ---- | -------- | ------- |
-| Game Port | UDP | 7777 |
+| Game Port | UDP & TCP | 7777 |
 | Query Port | UDP | 15777 |
 | Beacon Port | UDP | 15000 |
 
@@ -36,6 +37,7 @@ docker run \
   --name satisfactory-server \
   --mount type=volume,source=satisfactory-persistent-data,target=/home/steam/satisfactory \
   --publish 7777:7777/udp \
+  --publish 7777:7777/tcp \
   --publish 15777:15777/udp \
   --publish 15000:15000/udp \
   --env=GAME_PORT=7777 \
@@ -66,6 +68,7 @@ services:
     image: sknnr/satisfactory-server:latest
     ports:
       - "7777:7777/udp"
+      - "7777:7777/tcp"
       - "15777:15777/udp"
       - "15000:15000/udp"
     environment:
@@ -92,6 +95,7 @@ podman run \
   --name satisfactory-server \
   --mount type=volume,source=satisfactory-persistent-data,target=/home/steam/satisfactory \
   --publish 7777:7777/udp \
+  --publish 7777:7777/tcp \
   --publish 15777:15777/udp \
   --publish 15000:15000/udp \
   --env=GAME_PORT=7777 \

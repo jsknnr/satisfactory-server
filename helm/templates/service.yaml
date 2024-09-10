@@ -23,6 +23,13 @@ spec:
     {{- if eq .Values.service.type "NodePort" }}
     nodePort: {{ .Values.config.gamePort | int }}
     {{- end }}
+  - name: game-port-tcp
+    port: {{ .Values.config.gamePort | int }}
+    targetPort: game-port-tcp
+    protocol: TCP
+    {{- if eq .Values.service.type "NodePort" }}
+    nodePort: {{ .Values.config.gamePort | int }}
+    {{- end }}
   - name: query-port
     port: {{ .Values.config.queryPort | int }}
     targetPort: query-port
