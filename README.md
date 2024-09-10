@@ -7,6 +7,8 @@ Run Satisfactory dedicated server in a container. Optionally includes helm chart
 
 The processes within the container do **NOT** run as root. Everything runs as the user steam (gid:10000/uid:10000 by default). If you exec into the container, you will drop into `/home/steam` as the steam user. Satisfactory will be installed to `/home/steam/satisfactory`. Any persistent volumes should be mounted to `/home/steam/satisfactory` and be owned by 10000:10000. If you need to run as a different GID/UID you can build your own image and set the build arguments for CONTAINER_GID and CONTAINER_UID to specify to new values.
 
+Once your server is running, to configure it further you need to add it to your server manager in game.
+
 ### Ports
 Server to client is game port UDP, but the server manager also needs TCP. So which ever port you use for Game Port needs both TCP and UDP.
 
@@ -24,7 +26,6 @@ Server to client is game port UDP, but the server manager also needs TCP. So whi
 | GAME_PORT | Port for server connections. | 7777 | False |
 | QUERY_PORT | Port for query of server. | 15777 | False |
 | BEACON_PORT | Port for the beacon? | 15000 | False |
-| MULTIHOME | Address for server to listen on. You likely won't need to change this. | 0.0.0.0 | False |
 
 ### Docker
 
@@ -43,7 +44,6 @@ docker run \
   --env=GAME_PORT=7777 \
   --env=QUERY_PORT=15777 \
   --env=BEACON_PORT=15000 \
-  --env=MULTIHOME=0.0.0.0 \
   sknnr/satisfactory-server:latest
 ```
 
@@ -75,7 +75,6 @@ services:
       GAME_PORT: "7777"
       QUERY_PORT: "15777"
       BEACON_PORT: "15000"
-      MULTIHOME: "0.0.0.0"
     volumes:
       - satisfactory-persistent-data:/home/steam/satisfactory
     stop_grace_period: 90s
@@ -101,8 +100,7 @@ podman run \
   --env=GAME_PORT=7777 \
   --env=QUERY_PORT=15777 \
   --env=BEACON_PORT=15000 \
-  --env=MULTIHOME=0.0.0.0 \
-  sknnr/satisfactory-server:latest
+  docker.io/sknnr/satisfactory-server:latest
 ```
 
 ### Kubernetes

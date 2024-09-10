@@ -55,14 +55,13 @@ echo "--------------------------------------------------------------------------
 echo "Game Port: ${GAME_PORT}"
 echo "Query Port: ${QUERY_PORT}"
 echo "Beacon Port: ${BEACON_PORT}"
-echo "Multihome: ${MULTIHOME}"
 echo "Container Image Version: ${IMAGE_VERSION} "
 echo "--------------------------------------------------------------------------------"
 echo ""
 echo ""
 
 # Launch Satisfactory
-${SATISFACTORY_PATH}/FactoryServer.sh -ServerQueryPort=${QUERY_PORT} -BeaconPort=${BEACON_PORT} -Port=${GAME_PORT} -multihome=${MULTIHOME} &
+${SATISFACTORY_PATH}/FactoryServer.sh -ServerQueryPort=${QUERY_PORT} -BeaconPort=${BEACON_PORT} -Port=${GAME_PORT} &
 
 # Find pid for FactoryServer-Linux-Shipping
 timeout=0

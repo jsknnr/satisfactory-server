@@ -10,7 +10,6 @@ services:
       GAME_PORT: "7777"
       QUERY_PORT: "15777"
       BEACON_PORT: "15000"
-      MULTIHOME: "0.0.0.0"
     volumes:
       - satisfactory-persistent-data:/home/steam/satisfactory
     stop_grace_period: 90s
