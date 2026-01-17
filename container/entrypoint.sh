@@ -53,16 +53,14 @@ echo ""
 echo "$(timestamp) INFO: Launching Satisfactory!"
 echo "--------------------------------------------------------------------------------"
 echo "Game Port: ${GAME_PORT}"
-echo "Query Port: ${QUERY_PORT}"
-echo "Beacon Port: ${BEACON_PORT}"
+echo "Message Port: ${MESSAGE_PORT}"
 echo "Container Image Version: ${IMAGE_VERSION} "
 echo "--------------------------------------------------------------------------------"
 echo ""
 echo ""
 
 # Launch Satisfactory
-${SATISFACTORY_PATH}/FactoryServer.sh -unattended -ServerQueryPort=${QUERY_PORT} -BeaconPort=${BEACON_PORT} -Port=${GAME_PORT} &
-
+${SATISFACTORY_PATH}/FactoryServer.sh -Port=${GAME_PORT} -ReliablePort="$MESSAGE_PORT" -ExternalReliablePort="$MESSAGE_PORT" &
 # Find pid for FactoryServer-Linux-Shipping
 timeout=0
 while [ $timeout -lt 11 ]; do

@@ -19,6 +19,5 @@ volumes:
 
 config:
   gamePort: "7777"
-  queryPort: "15777"
-  beaconPort: "15000"
+  messagePort: "8888"
   multihome: "0.0.0.0"

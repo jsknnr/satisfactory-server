@@ -30,19 +30,12 @@ spec:
     {{- if eq .Values.service.type "NodePort" }}
     nodePort: {{ .Values.config.gamePort | int }}
     {{- end }}
-  - name: query-port
-    port: {{ .Values.config.queryPort | int }}
-    targetPort: query-port
+  - name: message-port
+    port: {{ .Values.config.messagePort | int }}
+    targetPort: message-port
     protocol: UDP
     {{- if eq .Values.service.type "NodePort" }}
-    nodePort: {{ .Values.config.queryPort | int }}
-    {{- end }}
-  - name: beacon-port
-    port: {{ .Values.config.beaconPort | int }}
-    targetPort: beacon-port
-    protocol: UDP
-    {{- if eq .Values.service.type "NodePort" }}
-    nodePort: {{ .Values.config.beaconPort| int }}
+    nodePort: {{ .Values.config.messagePort | int }}
     {{- end }}
   selector:
     app: "{{ .Chart.Name }}"

@@ -34,10 +34,8 @@ spec:
         env:
         - name: GAME_PORT
           value: {{ .Values.config.gamePort | quote }}
-        - name: QUERY_PORT
-          value: {{ .Values.config.queryPort | quote }}
-        - name: BEACON_PORT
-          value: {{ .Values.config.beaconPort | quote }}
+        - name: MESSAGE_PORT
+          value: {{ .Values.config.messagePort | quote }}
         - name: MULTIHOME
           value: {{ .Values.config.multihome | quote }}
         ports:
@@ -47,12 +45,9 @@ spec:
         - name: game-port-tcp
           containerPort: {{ .Values.config.gamePort | int }}
           protocol: TCP
-        - name: query-port
-          containerPort: {{ .Values.config.queryPort | int }}
-          protocol: UDP
-        - name: beacon-port
-          containerPort: {{ .Values.config.beaconPort | int }}
-          protocol: UDP
+        - name: message-port
+          containerPort: {{ .Values.config.messagePort | int }}
+          protocol: TCP
         volumeMounts:
         - name: data
           mountPath: /home/steam/satisfactory

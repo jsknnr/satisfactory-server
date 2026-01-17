@@ -15,8 +15,7 @@ Server to client is game port UDP, but the server manager also needs TCP. So whi
 | Port | Protocol | Default |
 | ---- | -------- | ------- |
 | Game Port | UDP & TCP | 7777 |
-| Query Port | UDP | 15777 |
-| Beacon Port | UDP | 15000 |
+| Messasge Port | TCP | 8888 |
 
 
 ### Environment Variables
@@ -24,8 +23,7 @@ Server to client is game port UDP, but the server manager also needs TCP. So whi
 | Name | Description | Default | Required |
 | ---- | ----------- | ------- | -------- |
 | GAME_PORT | Port for server connections. | 7777 | False |
-| QUERY_PORT | Port for query of server. | 15777 | False |
-| BEACON_PORT | Port for the beacon? | 15000 | False |
+| MESSAGE_PORT | Port for query of server. | 8888 | False |
 
 ### Docker
 
@@ -39,11 +37,9 @@ docker run \
   --mount type=volume,source=satisfactory-persistent-data,target=/home/steam/satisfactory \
   --publish 7777:7777/udp \
   --publish 7777:7777/tcp \
-  --publish 15777:15777/udp \
-  --publish 15000:15000/udp \
+  --publish 8888:8888/tcp \
   --env=GAME_PORT=7777 \
-  --env=QUERY_PORT=15777 \
-  --env=BEACON_PORT=15000 \
+  --env=MESSAGE_PORT=8888 \
   sknnr/satisfactory-server:latest
 ```
 
@@ -69,12 +65,10 @@ services:
     ports:
       - "7777:7777/udp"
       - "7777:7777/tcp"
-      - "15777:15777/udp"
-      - "15000:15000/udp"
+      - "8888:8888/tcp"
     environment:
       GAME_PORT: "7777"
-      QUERY_PORT: "15777"
-      BEACON_PORT: "15000"
+      MESSAGE_PORT: "8888"
     volumes:
       - satisfactory-persistent-data:/home/steam/satisfactory
     stop_grace_period: 90s
@@ -95,11 +89,9 @@ podman run \
   --mount type=volume,source=satisfactory-persistent-data,target=/home/steam/satisfactory \
   --publish 7777:7777/udp \
   --publish 7777:7777/tcp \
-  --publish 15777:15777/udp \
-  --publish 15000:15000/udp \
+  --publish 8888:8888/tcp \
   --env=GAME_PORT=7777 \
-  --env=QUERY_PORT=15777 \
-  --env=BEACON_PORT=15000 \
+  --env=MESSAGE_PORT=8888 \
   docker.io/sknnr/satisfactory-server:latest
 ```
 
