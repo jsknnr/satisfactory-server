@@ -61,7 +61,7 @@ echo ""
 echo ""
 
 # Launch Satisfactory
-${SATISFACTORY_PATH}/FactoryServer.sh -ServerQueryPort=${QUERY_PORT} -BeaconPort=${BEACON_PORT} -Port=${GAME_PORT} &
+${SATISFACTORY_PATH}/FactoryServer.sh -unattended -ServerQueryPort=${QUERY_PORT} -BeaconPort=${BEACON_PORT} -Port=${GAME_PORT} &
 
 # Find pid for FactoryServer-Linux-Shipping
 timeout=0
