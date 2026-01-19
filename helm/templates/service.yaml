@@ -17,7 +17,7 @@ spec:
   {{- end }}
   ports:
   - name: game-port
-    port: {{ .Values.config.gamePort | int }}
+    port: {{ .Values.config.gamePort | int }}s
     targetPort: game-port
     protocol: UDP
     {{- if eq .Values.service.type "NodePort" }}
@@ -33,7 +33,7 @@ spec:
   - name: message-port
     port: {{ .Values.config.messagePort | int }}
     targetPort: message-port
-    protocol: UDP
+    protocol: TCP
     {{- if eq .Values.service.type "NodePort" }}
     nodePort: {{ .Values.config.messagePort | int }}
     {{- end }}
